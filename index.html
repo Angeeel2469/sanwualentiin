@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín?</title>
+    <style>
+        body {
+            background-color: #000;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            color: white;
+            position: relative;
+        }
+        .container {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #ff4d6d;
+            margin-top: 100px;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 1.5rem;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        .btn-si {
+            background-color: #ff4d6d;
+            color: white;
+        }
+        .btn-no {
+            background-color: #666;
+            color: white;
+        }
+        .btn:hover {
+            transform: scale(1.1);
+        }
+        .tulipanes {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        .tulipan {
+            width: 30px;
+            height: 50px;
+            background-color: #ff4d6d;
+            border-radius: 15px 15px 5px 5px;
+            position: relative;
+            animation: crecer 4s infinite;
+        }
+        .tallo {
+            width: 4px;
+            height: 60px;
+            background-color: green;
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .luz {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, rgba(255,100,100,0.3) 20%, rgba(0,0,0,0) 80%);
+            border-radius: 50%;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: iluminar 4s infinite;
+        }
+        .corazones {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .corazon {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff4d6d;
+            clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 50% 80%, 20% 100%, 0% 35%);
+            animation: flotar 4s infinite;
+        }
+        @keyframes crecer {
+            0% { transform: scaleY(0); }
+            100% { transform: scaleY(1); }
+        }
+        @keyframes iluminar {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        @keyframes flotar {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="corazones" id="corazones"></div>
+    <div class="tulipanes" id="tulipanes"></div>
+    <div class="container">
+        <h1>¿Quieres ser mi San Valentin? 💖</h1>
+        <h2>Di que chiii por que sino chillo 💕</h2>
+        <div class="buttons">
+            <button class="btn btn-si" onclick="irARomantico()">Si 💘</button>
+            <button class="btn btn-no" onclick="desaparecerNo()">No 💔</button>
+        </div>
+    </div>
+    <script>
+        function desaparecerNo() {
+            document.querySelector('.btn-no').style.display = 'none';
+        }
+        function irARomantico() {
+            window.location.href = 'romantico.html';
+        }
+        function generarTulipanes() {
+            const contenedor = document.getElementById('tulipanes');
+            for (let i = 0; i < 10; i++) {
+                let tulipan = document.createElement('div');
+                tulipan.classList.add('tulipan');
+                let tallo = document.createElement('div');
+                tallo.classList.add('tallo');
+                let luz = document.createElement('div');
+                luz.classList.add('luz');
+                tulipan.appendChild(tallo);
+                tulipan.appendChild(luz);
+                contenedor.appendChild(tulipan);
+            }
+        }
+        function generarCorazones() {
+            const decoraciones = document.getElementById('corazones');
+            for (let i = 0; i < 30; i++) {
+                let corazon = document.createElement('div');
+                corazon.classList.add('corazon');
+                corazon.style.left = Math.random() * 100 + 'vw';
+                corazon.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                decoraciones.appendChild(corazon);
+            }
+        }
+        generarTulipanes();
+        generarCorazones();
+    </script>
+</body>
+</html>
